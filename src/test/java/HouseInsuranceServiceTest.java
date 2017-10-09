@@ -6,8 +6,12 @@ import org.junit.Test;
 import uk.co.subsidencewatch.SubsidenceAreaCheckerTechnicalFailureException;
 
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HouseInsuranceServiceTest {
+
+	private static final Logger LOGGER = Logger.getLogger(HouseInsuranceService.class.getName());
 
 	HouseInsuranceService houseInsuranceService = new HouseInsuranceServiceImpl();
 
@@ -43,18 +47,21 @@ public class HouseInsuranceServiceTest {
 	public void getCalculatedPremiumWithLowFloodRiskShouldReturnPremiumAmount() throws SubsidenceAreaCheckerTechnicalFailureException {
 		BigDecimal premium = houseInsuranceService.getCalculatedPremium("LO16 7GZ", 2, false);
 		Assert.assertEquals(BigDecimal.valueOf(110), premium);
+		LOGGER.log(Level.WARNING, "Insurance base annual premium is 110₤");
 	}
 
 	@Test()
 	public void getCalculatedPremiumWithMediumFloodRiskShouldReturnPremiumAmount() throws SubsidenceAreaCheckerTechnicalFailureException {
 		BigDecimal premium = houseInsuranceService.getCalculatedPremium("MO16 7GZ", 2, false);
 		Assert.assertEquals(BigDecimal.valueOf(126.50), premium);
+		LOGGER.log(Level.WARNING, "Insurance base annual premium is 126.60₤");
 	}
 
 	@Test()
 	public void getCalculatedPremiumWithHighFloodRiskShouldReturnZeroAmount() throws SubsidenceAreaCheckerTechnicalFailureException {
 		BigDecimal premium = houseInsuranceService.getCalculatedPremium("HO16 7GZ", 2, false);
 		Assert.assertEquals(BigDecimal.ZERO, premium);
+
 	}
 
 
