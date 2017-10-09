@@ -1,0 +1,28 @@
+Business notes:
+
+1)Maybe the parameter of No of bedrooms should be better defined.It is a little bit confusing
+with all these bullets since the requirement is that only a house with zero to four bedrooms
+can be insured
+2)Product owner should refer a link with the valid post codes of UK area so as to have a reference of
+valid and invalid post codes.Same logic with the post codes for subsidence area and for area in flood risk.
+
+Technical notes:
+
+HouseInsuranceService:
+1)Changed the signature of getCalculatedPremium method from int to BigDecimal 
+because the amount can be 126.50 not only int.
+2)added a private method to calculate the amount based on flood risk.
+3)The message of "Not available insurance" is logged accordingly.
+4)Null postcode is considered as an exceptional case.
+
+FloodAreaChecker:
+1)Made the assumption that(due to missing requirements of the post codes of flood risk areas):
+   High flood risk area post codes begin with "H"
+   Medium flood risk area post codes begin with "M"
+   Low flood risk area post codes begin with "L"
+2)A new method isPostcodeValid is created in order to check if the post code follows UK post code patterns.
+
+SubsidenceAreaChecker:
+1)Made the assumption that(due to missing requirements of the post codes of subsidence area):
+   Subsidence are post  codes begin with "S"
+   
